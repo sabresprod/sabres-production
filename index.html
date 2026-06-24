@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sabres Production | Video Editor & AI Content Creator</title>
+  <meta name="description" content="Sabres Production — Making ideas come to life with high-end A.I generated content and cutting-edge editing. Video Editing, A.I Content Creation, Dubbing." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Custom Cursor -->
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- Navbar -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-logo">
+      <span class="logo-sabres">SABRES</span>
+      <span class="logo-prod">PRODUCTION</span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#work" class="nav-link">Work</a></li>
+      <li><a href="#services" class="nav-link">Services</a></li>
+      <li><a href="#about" class="nav-link">About</a></li>
+      <li><a href="#contact" class="nav-link">Contact</a></li>
+    </ul>
+    <div class="nav-hamburger" id="navHamburger">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <ul>
+      <li><a href="#work" class="mobile-link">Work</a></li>
+      <li><a href="#services" class="mobile-link">Services</a></li>
+      <li><a href="#about" class="mobile-link">About</a></li>
+      <li><a href="#contact" class="mobile-link">Contact</a></li>
+    </ul>
+  </div>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero" id="hero">
+    <div class="hero-grain"></div>
+    <div class="hero-bg-lines"></div>
+    <div class="hero-content">
+      <div class="hero-tag reveal-up">Video Editor & AI Content Creator</div>
+      <h1 class="hero-title reveal-up delay-1">
+        <span class="hero-title-line">SABRES</span>
+        <span class="hero-title-line accent-line">PRODUCTION</span>
+      </h1>
+      <p class="hero-sub reveal-up delay-2">Making ideas come to life with high‑end A.I generated content and cutting‑edge editing.</p>
+      <div class="hero-cta reveal-up delay-3">
+        <a href="#work" class="btn btn-primary">See My Work</a>
+        <a href="#contact" class="btn btn-ghost">Get In Touch</a>
+      </div>
+    </div>
+    <div class="hero-scroll-indicator">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ===== ABOUT ===== -->
+  <section class="about" id="about">
+    <div class="about-inner">
+      <div class="about-left">
+        <div class="section-label">About</div>
+        <h2 class="section-title dark">Behind the Blade</h2>
+      </div>
+      <div class="about-right">
+        <p class="about-text">
+          Making ideas come to life with high‑end A.I generated content and cutting‑edge editing. I specialize in transforming raw concepts into polished visual stories — whether it's a corporate campaign, a DJ's world tour, or something born purely from creative obsession.
+        </p>
+        <p class="about-text">
+          Working across social media, advertising, and live event promotion, I blend cinematic technique with the latest AI tools to produce content that doesn't just inform — it captivates.
+        </p>
+        <div class="about-stats">
+          <div class="stat">
+            <span class="stat-num">6+</span>
+            <span class="stat-label">Projects</span>
+          </div>
+          <div class="stat">
+            <span class="stat-num">3</span>
+            <span class="stat-label">Services</span>
+          </div>
+          <div class="stat">
+            <span class="stat-num">∞</span>
+            <span class="stat-label">Ideas</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SERVICES ===== -->
+  <section class="services" id="services">
+    <div class="services-grain"></div>
+    <div class="services-inner">
+      <div class="section-label light">What I Do</div>
+      <h2 class="section-title light">Services</h2>
+      <div class="services-grid">
+
+        <div class="service-card" id="service-ai">
+          <div class="service-icon">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+              <circle cx="20" cy="20" r="18" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M13 20h14M20 13v14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              <circle cx="20" cy="20" r="4" fill="currentColor" opacity="0.3"/>
+            </svg>
+          </div>
+          <h3 class="service-title">A.I Content Creation</h3>
+          <p class="service-desc">Harnessing cutting-edge AI tools to generate hyper-realistic visuals, custom B-roll, and immersive environments that push the boundaries of what's possible.</p>
+          <div class="service-line"></div>
+        </div>
+
+        <div class="service-card" id="service-edit">
+          <div class="service-icon">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+              <rect x="6" y="10" width="28" height="20" rx="2" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M16 20l6-4v8l-6-4z" fill="currentColor" opacity="0.6"/>
+            </svg>
+          </div>
+          <h3 class="service-title">Video Editing</h3>
+          <p class="service-desc">From tight 15-second corporate spots to full cinematic wedding films — dynamic pacing, clean aesthetics, and a sharp visual message that lands from the first frame.</p>
+          <div class="service-line"></div>
+        </div>
+
+        <div class="service-card" id="service-dub">
+          <div class="service-icon">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+              <path d="M20 8v24M14 13v14M8 17v6M26 13v14M32 17v6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3 class="service-title">Dubbing</h3>
+          <p class="service-desc">Professional voice adaptation that preserves tone, timing, and emotion across languages — making your content truly borderless.</p>
+          <div class="service-line"></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== WORK ===== -->
+  <section class="work" id="work">
+    <div class="work-inner">
+      <div class="section-label">Portfolio</div>
+      <h2 class="section-title dark">Selected Work</h2>
+
+      <!-- CAREER TAB -->
+      <div class="work-tabs">
+        <button class="tab-btn active" data-tab="career" id="tab-career">Career</button>
+        <button class="tab-btn" data-tab="hobby" id="tab-hobby">Hobby</button>
+      </div>
+
+      <!-- CAREER PROJECTS -->
+      <div class="projects-grid" id="tab-content-career">
+
+        <!-- Bayer -->
+        <article class="project-card" id="proj-bayer" data-link="https://youtu.be/sDy2A3SgOQ0">
+          <div class="project-thumb">
+            <div class="yt-thumb-wrap">
+              <img src="https://img.youtube.com/vi/sDy2A3SgOQ0/maxresdefault.jpg" alt="Bayer Going Green" class="project-thumb-img" onerror="this.src='https://img.youtube.com/vi/sDy2A3SgOQ0/hqdefault.jpg'" />
+            </div>
+            <div class="project-overlay">
+              <div class="play-btn">
+                <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                  <path d="M10 8l12 6-12 6V8z" fill="white"/>
+                </svg>
+              </div>
+              <span class="project-cta">Watch Project</span>
+            </div>
+            <div class="project-category-tag">A.I Content Creation & Video Editing</div>
+          </div>
+          <div class="project-info">
+            <div class="project-meta">
+              <span class="project-client">Bayer</span>
+            </div>
+            <h3 class="project-name">Bayer Going Green</h3>
+            <p class="project-desc">When Bayer decided to take a significant step toward a greener future by replacing its employee fleet with electric vehicles, it was clear the announcement had to be nothing short of impressive. The challenge was distilling this major news into a tight 15-second window without losing any of the initiative's power and impact.</p>
+          </div>
+        </article>
+
+        <!-- DJ SAGI KARIV -->
+        <article class="project-card project-card--wide" id="proj-sagi">
+          <div class="project-thumb">
+            <div class="project-category-tag">A.I Content Creation & Video Editing</div>
+          </div>
+          <div class="project-info">
+            <div class="project-meta">
+              <span class="project-client">DJ SAGI KARIV</span>
+            </div>
+            <h3 class="project-name">DJ SAGI KARIV — Summer Tour</h3>
+            <p class="project-desc">When a world-renowned DJ asks you to create the marketing assets for his international summer tour, you simply can't refuse. A campaign built on striking visuals, collector's edition concepts, and 90s club-scene aesthetics — radiating electrifying energy that promises an unforgettable summer.</p>
+
+            <!-- Sagi Carousel -->
+            <div class="carousel" id="sagi-carousel">
+              <div class="carousel-track" id="sagi-track">
+
+                <div class="carousel-slide">
+                  <div class="carousel-yt-wrap">
+                    <iframe
+                      src="https://www.youtube.com/embed/yiFBGXY513c"
+                      title="DJ SAGI KARIV Summer Tour Teaser"
+                      frameborder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowfullscreen
+                      class="carousel-iframe">
+                    </iframe>
+                  </div>
+                  <div class="carousel-slide-label">Summer Tour Teaser</div>
+                </div>
+
+                <div class="carousel-slide">
+                  <img src="sagi_london_figure.png" alt="DJ Sagi Kariv — London Edition Action Figure" class="carousel-img" />
+                  <div class="carousel-slide-label">London Edition — Collector's Action Figure</div>
+                </div>
+
+                <div class="carousel-slide">
+                  <img src="sagi_london_poster.png" alt="DJ Sagi Kariv — London Night Poster" class="carousel-img" />
+                  <div class="carousel-slide-label">London Night — Tour Poster</div>
+                </div>
+
+              </div>
+              <button class="carousel-btn carousel-btn--prev" data-carousel="sagi" aria-label="Previous">&#8592;</button>
+              <button class="carousel-btn carousel-btn--next" data-carousel="sagi" aria-label="Next">&#8594;</button>
+              <div class="carousel-dots" id="sagi-dots">
+                <span class="dot active" data-index="0"></span>
+                <span class="dot" data-index="1"></span>
+                <span class="dot" data-index="2"></span>
+              </div>
+            </div>
+
+          </div>
+        </article>
+
+        <!-- UGC -->
+        <article class="project-card project-card--wide" id="proj-ugc">
+          <div class="project-thumb">
+            <div class="project-category-tag">A.I Content Creation & Video Editing</div>
+          </div>
+          <div class="project-info">
+            <div class="project-meta">
+              <span class="project-client">UGC</span>
+            </div>
+            <h3 class="project-name">UGC — Health & Lifestyle Series</h3>
+            <p class="project-desc">Taking professional, informative, and sometimes scientific information and transforming it into a captivating visual story you simply can't look away from. Three distinct topics centered around health, nutrition, and lifestyle — each with custom AI-generated B-roll, perfectly tailored to its specific vibe.</p>
+
+            <!-- UGC Carousel -->
+            <div class="carousel" id="ugc-carousel">
+              <div class="carousel-track" id="ugc-track">
+
+                <div class="carousel-slide">
+                  <div class="carousel-yt-wrap">
+                    <iframe
+                      src="https://www.youtube.com/embed/b5q24chUBaM"
+                      title="Fibermaxxing"
+                      frameborder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowfullscreen
+                      class="carousel-iframe">
+                    </iframe>
+                  </div>
+                  <div class="carousel-slide-label">Fibermaxxing</div>
+                </div>
+
+                <div class="carousel-slide">
+                  <div class="carousel-yt-wrap">
+                    <iframe
+                      src="https://www.youtube.com/embed/6dkvyPR4FhA"
+                      title="Urolithin A"
+                      frameborder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowfullscreen
+                      class="carousel-iframe">
+                    </iframe>
+                  </div>
+                  <div class="carousel-slide-label">Urolithin A</div>
+                </div>
+
+                <div class="carousel-slide">
+                  <div class="carousel-yt-wrap">
+                    <iframe
+                      src="https://www.youtube.com/embed/xzPoXUn-elc"
+                      title="Nasal Breathing"
+                      frameborder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowfullscreen
+                      class="carousel-iframe">
+                    </iframe>
+                  </div>
+                  <div class="carousel-slide-label">Nasal Breathing</div>
+                </div>
+
+              </div>
+              <button class="carousel-btn carousel-btn--prev" data-carousel="ugc" aria-label="Previous">&#8592;</button>
+              <button class="carousel-btn carousel-btn--next" data-carousel="ugc" aria-label="Next">&#8594;</button>
+              <div class="carousel-dots" id="ugc-dots">
+                <span class="dot active" data-index="0"></span>
+                <span class="dot" data-index="1"></span>
+                <span class="dot" data-index="2"></span>
+              </div>
+            </div>
+
+          </div>
+        </article>
+
+      </div><!-- /career grid -->
+
+      <!-- HOBBY PROJECTS -->
+      <div class="projects-grid hidden" id="tab-content-hobby">
+
+        <!-- CATAN -->
+        <article class="project-card" id="proj-catan" data-link="https://youtu.be/HHc5nEeeFtQ?si=stiJ-y5Ox45ku2kT">
+          <div class="project-thumb">
+            <div class="yt-thumb-wrap">
+              <img src="https://img.youtube.com/vi/HHc5nEeeFtQ/maxresdefault.jpg" alt="CATAN" class="project-thumb-img" onerror="this.src='https://img.youtube.com/vi/HHc5nEeeFtQ/hqdefault.jpg'" />
+            </div>
+            <div class="project-overlay">
+              <div class="play-btn">
+                <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                  <path d="M10 8l12 6-12 6V8z" fill="white"/>
+                </svg>
+              </div>
+              <span class="project-cta">Watch Project</span>
+            </div>
+            <div class="project-category-tag">A.I Content Creation & Video Editing & Dubbing</div>
+          </div>
+          <div class="project-info">
+            <div class="project-meta">
+              <span class="project-client">Personal Project</span>
+            </div>
+            <h3 class="project-name">CATAN</h3>
+            <p class="project-desc">As an avid player, I couldn't ignore the hilarious phenomenon of how Catan consistently turns the closest of friends into fierce rivals. The goal: walk the line between an epic cinematic trailer and a witty commercial — capturing the grandiose feeling of building empires, then sharply cutting to the explosive, table-flipping reality. Tearing friendships apart since 1995.</p>
+          </div>
+        </article>
+
+        <!-- Ron & Ella -->
+        <article class="project-card" id="proj-wedding" data-link="https://youtu.be/tsT5o09XCTA">
+          <div class="project-thumb">
+            <div class="yt-thumb-wrap">
+              <img src="https://img.youtube.com/vi/tsT5o09XCTA/maxresdefault.jpg" alt="Ron & Ella Wedding Video" class="project-thumb-img" onerror="this.src='https://img.youtube.com/vi/tsT5o09XCTA/hqdefault.jpg'" />
+            </div>
+            <div class="project-overlay">
+              <div class="play-btn">
+                <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                  <path d="M10 8l12 6-12 6V8z" fill="white"/>
+                </svg>
+              </div>
+              <span class="project-cta">Watch Project</span>
+            </div>
+            <div class="project-category-tag">A.I Content Creation & Video Editing</div>
+          </div>
+          <div class="project-info">
+            <div class="project-meta">
+              <span class="project-client">Close Friends</span>
+            </div>
+            <h3 class="project-name">Ron & Ella Wedding Video</h3>
+            <p class="project-desc">When invited to my close friends' wedding, I wanted to break the ice and ease the natural tension with something that highlights the funny side of their relationship. Three specific questions, authentic candid answers, clever editing, and the power of AI — the result is unforgettable, upbeat, and genuinely hilarious.</p>
+          </div>
+        </article>
+
+        <!-- Le Passion -->
+        <article class="project-card" id="proj-cornichon" data-link="https://youtu.be/JQKZs5qGmZI?si=7snYANe_FTsC1xuJ">
+          <div class="project-thumb">
+            <div class="yt-thumb-wrap">
+              <img src="https://img.youtube.com/vi/JQKZs5qGmZI/maxresdefault.jpg" alt="Le Passion Pour Le Cornichon" class="project-thumb-img" onerror="this.src='https://img.youtube.com/vi/JQKZs5qGmZI/hqdefault.jpg'" />
+            </div>
+            <div class="project-overlay">
+              <div class="play-btn">
+                <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                  <path d="M10 8l12 6-12 6V8z" fill="white"/>
+                </svg>
+              </div>
+              <span class="project-cta">Watch Project</span>
+            </div>
+            <div class="project-category-tag">A.I Content Creation & Video Editing</div>
+          </div>
+          <div class="project-info">
+            <div class="project-meta">
+              <span class="project-client">Personal Project</span>
+            </div>
+            <h3 class="project-name">Le Passion Pour Le Cornichon</h3>
+            <p class="project-desc">A playful nod to my early days with AI tools — walking the fine line between absolute luxury and complete absurdity. Ultra-realistic, mesmerizing frames that build anticipation like a high-end French perfume campaign, then abruptly reveal a completely ridiculous product. Proving you can achieve top-tier visuals without taking things too seriously.</p>
+          </div>
+        </article>
+
+      </div><!-- /hobby grid -->
+
+    </div>
+  </section>
+
+  <!-- ===== CONTACT ===== -->
+  <section class="contact" id="contact">
+    <div class="contact-grain"></div>
+    <div class="contact-inner">
+      <div class="section-label light">Let's Work Together</div>
+      <h2 class="section-title light">Get In Touch</h2>
+      <p class="contact-sub">Have a project in mind? Let's bring it to life.</p>
+
+      <div class="contact-links">
+        <a href="mailto:sabres.prod@gmail.com" class="contact-item" id="contact-email">
+          <div class="contact-icon">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+              <rect x="2" y="5" width="18" height="12" rx="2" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M2 8l9 5 9-5" stroke="currentColor" stroke-width="1.5"/>
+            </svg>
+          </div>
+          <span>sabres.prod@gmail.com</span>
+        </a>
+
+        <a href="https://www.youtube.com/@SabresProduction" target="_blank" rel="noopener" class="contact-item" id="contact-yt">
+          <div class="contact-icon">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+              <rect x="2" y="5" width="18" height="12" rx="2" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M9 8.5l5 2.5-5 2.5V8.5z" fill="currentColor"/>
+            </svg>
+          </div>
+          <span>@SabresProduction</span>
+        </a>
+
+        <a href="https://www.linkedin.com/in/tzabar-atlan" target="_blank" rel="noopener" class="contact-item" id="contact-li">
+          <div class="contact-icon">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+              <rect x="2" y="2" width="18" height="18" rx="3" stroke="currentColor" stroke-width="1.5"/>
+              <circle cx="7.5" cy="8" r="1.2" fill="currentColor"/>
+              <path d="M7.5 10.5v5M10.5 10.5v5M10.5 13c0-1.5 4-1.5 4 0v2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <span>LinkedIn</span>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <span class="footer-logo">SABRES PRODUCTION</span>
+      <span class="footer-copy">&copy; 2025 All rights reserved.</span>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
