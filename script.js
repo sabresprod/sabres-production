@@ -137,7 +137,7 @@ function showThumb(thumb, fallback, videoId, isMulti) {
   };
   if (isMulti) {
     previewMultiBadge.style.display = 'block';
-    previewPlayBtn.style.display    = 'none';
+    previewPlayBtn.style.display    = videoId ? 'flex' : 'none';
   } else {
     previewMultiBadge.style.display = 'none';
     previewPlayBtn.style.display    = 'flex';
