@@ -1,23 +1,20 @@
-# Static media (local only — not tracked by git)
-static-content/
+# Images inside static-content/ only
+static-content/*.png
+static-content/*.jpg
+static-content/*.jpeg
+static-content/*.gif
+static-content/*.webp
+static-content/*.svg
+static-content/*.ico
+static-content/*.bmp
+static-content/*.tiff
 
-# Loose images at root
-*.png
-*.jpg
-*.jpeg
-*.gif
-*.webp
-*.svg
-*.ico
-*.bmp
-*.tiff
-
-# Videos
-*.mp4
-*.mov
-*.avi
-*.mkv
-*.webm
+# Videos inside static-content/ only
+static-content/*.mp4
+static-content/*.mov
+static-content/*.avi
+static-content/*.mkv
+static-content/*.webm
 
 # OS files
 .DS_Store
