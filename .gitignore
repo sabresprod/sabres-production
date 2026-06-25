@@ -1,3 +1,4 @@
+# assets/ folder IS tracked by git (logos, hero image)
 # Images inside static-content/ only
 static-content/*.png
 static-content/*.jpg
