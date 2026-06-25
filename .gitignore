@@ -1,4 +1,7 @@
-# Images
+# Static media (local only — not tracked by git)
+static-content/
+
+# Loose images at root
 *.png
 *.jpg
 *.jpeg
