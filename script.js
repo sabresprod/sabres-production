@@ -149,7 +149,7 @@ function hideThumb() {
 
 function playVideo() {
   if (!currentVideoId) return;
-  previewIframe.src = `https://www.youtube.com/embed/${currentVideoId}?autoplay=1&rel=0&modestbranding=1`;
+  previewIframe.src = `https://www.youtube-nocookie.com/embed/${currentVideoId}?autoplay=1&rel=0&modestbranding=1`;
   playerActive = true;
   showState('player');
 }
