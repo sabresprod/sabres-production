@@ -57,12 +57,13 @@ ul  { list-style: none; }
 .sabres-container {
   position: fixed;
   bottom: -8%;
-  right: -10%;
+  right: -28%; /* Move more to the right, showing less than half of it */
   width: 58vw;
   max-width: 800px;
   z-index: 10; /* Float in foreground */
   pointer-events: none;
   transform-origin: bottom right;
+  perspective: 1000px; /* Enable 3D depth */
   transition:
     bottom 1.2s var(--ease),
     right 1.2s var(--ease),
@@ -83,6 +84,7 @@ ul  { list-style: none; }
   width: 100%;
   position: relative;
   transform-origin: center center;
+  transform-style: preserve-3d; /* Maintain 3D space */
 }
 
 /* Infinitely spin the rotator when centered */
@@ -91,8 +93,8 @@ ul  { list-style: none; }
 }
 
 @keyframes slow-spin {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
+  from { transform: rotateY(0deg); }
+  to   { transform: rotateY(360deg); }
 }
 
 .sabres-layer {
@@ -276,8 +278,7 @@ ul  { list-style: none; }
 }
 
 .hero-scroll-indicator {
-  position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
-  z-index: 2;
+  margin-top: 56px; /* Place below buttons without overlap */
   display: flex; flex-direction: column; align-items: center; gap: 12px;
   font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
   color: var(--off-white); opacity: 0.3;
@@ -285,8 +286,8 @@ ul  { list-style: none; }
 }
 .scroll-line { width: 1px; height: 48px; background: linear-gradient(to bottom, rgba(248,246,255,0.4), transparent); }
 @keyframes scrollBob {
-  0%, 100% { transform: translateX(-50%) translateY(0); }
-  50%       { transform: translateX(-50%) translateY(6px); }
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(6px); }
 }
 
 /* ---- ABOUT ---- */
