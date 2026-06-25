@@ -56,10 +56,10 @@ ul  { list-style: none; }
 /* ---- Sabres Container & Rotator ---- */
 .sabres-container {
   position: fixed;
-  bottom: -8%;
-  right: -28%; /* Move more to the right, showing less than half of it */
-  width: 58vw;
-  max-width: 800px;
+  bottom: -10%;
+  right: -34%; /* Pushed further right but much larger */
+  width: 72vw;
+  max-width: 1050px;
   z-index: 10; /* Float in foreground */
   pointer-events: none;
   transform-origin: bottom right;
@@ -93,8 +93,8 @@ ul  { list-style: none; }
 }
 
 @keyframes slow-spin {
-  from { transform: rotateY(0deg); }
-  to   { transform: rotateY(360deg); }
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
 }
 
 .sabres-layer {
