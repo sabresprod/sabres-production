@@ -117,15 +117,22 @@ function initCarousel(id) {
   let current = 0;
   const total = slides.length;
 
+  const container = document.getElementById(id + '-carousel');
+  if (!container) return;
+
+  // Hide arrows and dots if only 1 slide
+  if (total <= 1) {
+    container.querySelector('.carousel-btn--prev').style.display = 'none';
+    container.querySelector('.carousel-btn--next').style.display = 'none';
+    if (dotsContainer) dotsContainer.style.display = 'none';
+    return;
+  }
+
   function goTo(index) {
     current = (index + total) % total;
     track.style.transform = `translateX(-${current * 100}%)`;
     dots.forEach((d, i) => d.classList.toggle('active', i === current));
   }
-
-  // Prev / Next buttons
-  const container = document.getElementById(id + '-carousel');
-  if (!container) return;
 
   container.querySelector('.carousel-btn--prev').addEventListener('click', e => {
     e.stopPropagation();
