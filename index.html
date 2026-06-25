@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sabres Production | Video Editor & AI Content Creator</title>
-  <meta name="description" content="Sabres Production — Making ideas come to life with high-end A.I generated content and cutting-edge editing. Video Editing, A.I Content Creation, Dubbing." />
+  <meta name="description" content="Sabres Production — Making ideas come to life with high-end A.I generated content and cutting-edge editing." />
   <link rel="icon" href="assets/logo_en.png" type="image/png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -17,14 +17,18 @@
   <div class="cursor-dot" id="cursorDot"></div>
   <div class="cursor-ring" id="cursorRing"></div>
 
-  <!-- Fixed Sabres Background -->
-  <div class="sabres-bg" id="sabresBg" aria-hidden="true">
+  <!-- Fixed Sabres — Naked (always visible) -->
+  <div class="sabres-layer sabres-naked" id="sabresNaked" aria-hidden="true">
+    <img src="assets/Sabres_naked.png" alt="" />
+  </div>
+  <!-- Fixed Sabres — Full (grows with scroll) -->
+  <div class="sabres-layer sabres-full" id="sabresFull" aria-hidden="true">
     <img src="assets/sabres_hero.png" alt="" />
   </div>
 
   <!-- Navbar -->
   <nav class="navbar" id="navbar">
-    <a href="#hero" class="logo-flip" id="logoFlip" aria-label="Sabres Production">
+    <a href="#hero" class="logo-flip" aria-label="Sabres Production">
       <div class="logo-flip-inner">
         <div class="logo-front"><img src="assets/logo_en.png" alt="Sabres Production" /></div>
         <div class="logo-back"><img src="assets/logo_he.png" alt="סברס פרודקשן" /></div>
@@ -147,20 +151,34 @@
       <!-- LEFT: Sticky preview panel -->
       <div class="work-preview-panel">
         <div class="preview-inner">
-          <div class="preview-default" id="previewDefault">
+
+          <!-- State 1: Default logo -->
+          <div class="preview-state preview-default" id="previewDefault">
             <img src="assets/logo_en.png" alt="Sabres Production" class="preview-logo" />
           </div>
-          <div class="preview-thumb-wrap" id="previewThumbWrap">
+
+          <!-- State 2: Thumbnail -->
+          <div class="preview-state preview-thumb-wrap" id="previewThumbWrap">
             <img src="" alt="Project preview" id="previewThumb" class="preview-thumb-img" />
-            <div class="preview-play-icon">
-              <div class="preview-play-btn">
+            <div class="preview-overlay">
+              <button class="preview-play-btn" id="previewPlayBtn" aria-label="Play video">
                 <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-                  <path d="M9 6l14 8-14 8V6z" fill="white"/>
+                  <path d="M9 5l16 9-16 9V5z" fill="white"/>
                 </svg>
-              </div>
+              </button>
             </div>
-            <div class="preview-multi-badge" id="previewMultiBadge">+2 more videos</div>
+            <div class="preview-multi-badge" id="previewMultiBadge">3 videos below ↓</div>
           </div>
+
+          <!-- State 3: Inline player -->
+          <div class="preview-state preview-player-wrap" id="previewPlayerWrap">
+            <iframe id="previewIframe" src="" frameborder="0"
+              allow="autoplay; encrypted-media; picture-in-picture"
+              allowfullscreen class="preview-iframe">
+            </iframe>
+            <button class="preview-back-btn" id="previewBackBtn">&#8592; Back</button>
+          </div>
+
         </div>
       </div>
 
@@ -174,142 +192,144 @@
           <button class="tab-btn"        data-tab="hobby"  id="tab-hobby">Hobby</button>
         </div>
 
-        <!-- CAREER -->
+        <!-- CAREER LIST -->
         <div class="project-list" id="list-career">
 
-          <div class="project-row" id="row-bayer"
-               data-thumb="https://img.youtube.com/vi/sDy2A3SgOQ0/maxresdefault.jpg"
-               data-fallback="https://img.youtube.com/vi/sDy2A3SgOQ0/hqdefault.jpg"
-               data-link="https://youtu.be/sDy2A3SgOQ0"
+          <div class="project-item" id="proj-bayer"
+               data-thumb="https://img.youtube.com/vi/sDy2A3SgOQ0/hqdefault.jpg"
+               data-fallback="https://img.youtube.com/vi/sDy2A3SgOQ0/mqdefault.jpg"
+               data-videoid="sDy2A3SgOQ0"
                data-multi="false">
-            <span class="proj-num">01</span>
-            <div class="proj-info">
-              <h3 class="proj-title">Bayer Going Green</h3>
-              <div class="proj-tags">
-                <span class="proj-tag">A.I Content</span>
-                <span class="proj-tag">Video Editing</span>
+            <div class="proj-header">
+              <h3 class="proj-name">Bayer Going Green</h3>
+              <div class="proj-meta">
                 <span class="proj-client">Bayer</span>
+                <span class="proj-tag">A.I Content</span>
+                <span class="proj-tag">Video Editing</span>
               </div>
             </div>
-            <span class="proj-arrow">&#8594;</span>
+            <div class="proj-body">
+              <p class="proj-desc">When Bayer decided to take a significant step toward a greener future by replacing its employee fleet with electric vehicles, it was clear the announcement had to be nothing short of impressive. The challenge: distill this major news into a tight 15-second window without losing any of the initiative's power and impact. The result is a concise piece that directly conveys the company's sense of progress — capturing attention from the very first moment.</p>
+            </div>
           </div>
 
-          <div class="project-row" id="row-sagi"
-               data-thumb="https://img.youtube.com/vi/yiFBGXY513c/maxresdefault.jpg"
-               data-fallback="https://img.youtube.com/vi/yiFBGXY513c/hqdefault.jpg"
-               data-link="https://youtube.com/shorts/yiFBGXY513c?feature=share"
+          <div class="project-item" id="proj-sagi"
+               data-thumb="https://img.youtube.com/vi/yiFBGXY513c/hqdefault.jpg"
+               data-fallback="https://img.youtube.com/vi/yiFBGXY513c/mqdefault.jpg"
+               data-videoid="yiFBGXY513c"
                data-multi="false">
-            <span class="proj-num">02</span>
-            <div class="proj-info">
-              <h3 class="proj-title">DJ SAGI KARIV — Summer Tour</h3>
-              <div class="proj-tags">
+            <div class="proj-header">
+              <h3 class="proj-name">DJ SAGI KARIV — Summer Tour</h3>
+              <div class="proj-meta">
+                <span class="proj-client">DJ SAGI KARIV</span>
                 <span class="proj-tag">A.I Content</span>
                 <span class="proj-tag">Video Editing</span>
-                <span class="proj-client">DJ SAGI KARIV</span>
               </div>
             </div>
-            <span class="proj-arrow">&#8594;</span>
+            <div class="proj-body">
+              <p class="proj-desc">When a world-renowned DJ asks you to create marketing assets for his international summer tour, you simply can't refuse. We kicked things off with a collaborative brainstorming process, translating the vibrant energy of his music into a striking and unique visual language — resulting in a campaign filled with highly creative, colorful deliverables.</p>
+            </div>
           </div>
 
-          <div class="project-row project-row--expandable" id="row-ugc"
-               data-thumb="https://img.youtube.com/vi/b5q24chUBaM/maxresdefault.jpg"
-               data-fallback="https://img.youtube.com/vi/b5q24chUBaM/hqdefault.jpg"
-               data-link=""
+          <div class="project-item project-item--multi" id="proj-ugc"
+               data-thumb="https://img.youtube.com/vi/b5q24chUBaM/hqdefault.jpg"
+               data-fallback="https://img.youtube.com/vi/b5q24chUBaM/mqdefault.jpg"
+               data-videoid=""
                data-multi="true">
-            <span class="proj-num">03</span>
-            <div class="proj-info">
-              <h3 class="proj-title">UGC — Health &amp; Lifestyle</h3>
-              <div class="proj-tags">
+            <div class="proj-header">
+              <h3 class="proj-name">UGC — Health &amp; Lifestyle</h3>
+              <div class="proj-meta">
+                <span class="proj-tag proj-tag--multi">3 Videos</span>
                 <span class="proj-tag">A.I Content</span>
                 <span class="proj-tag">Video Editing</span>
-                <span class="proj-tag proj-tag--multi">3 Videos</span>
               </div>
             </div>
-            <span class="proj-arrow" id="ugc-arrow">&#8595;</span>
-          </div>
-          <div class="project-expand" id="ugc-expand">
-            <p class="expand-desc">Three health and lifestyle topics — each with custom AI-generated B-roll perfectly tailored to its vibe, maintaining a clean minimalist look that makes complex topics feel human and accessible.</p>
-            <div class="expand-videos">
-              <div class="expand-vid">
-                <div class="expand-yt-wrap">
-                  <iframe src="https://www.youtube.com/embed/b5q24chUBaM" title="Fibermaxxing" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <div class="proj-body">
+              <p class="proj-desc">Taking professional, scientific content and transforming it into captivating visual stories. Three distinct health topics — each with custom AI-generated B-roll tailored to its specific vibe. Clean, minimalist, and polished — making complex concepts feel human and accessible.</p>
+              <div class="expand-videos">
+                <div class="expand-vid">
+                  <div class="expand-yt-wrap">
+                    <iframe src="https://www.youtube.com/embed/b5q24chUBaM" title="Fibermaxxing" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                  </div>
+                  <span class="expand-vid-label">Fibermaxxing</span>
                 </div>
-                <span class="expand-vid-label">Fibermaxxing</span>
-              </div>
-              <div class="expand-vid">
-                <div class="expand-yt-wrap">
-                  <iframe src="https://www.youtube.com/embed/6dkvyPR4FhA" title="Urolithin A" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <div class="expand-vid">
+                  <div class="expand-yt-wrap">
+                    <iframe src="https://www.youtube.com/embed/6dkvyPR4FhA" title="Urolithin A" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                  </div>
+                  <span class="expand-vid-label">Urolithin A</span>
                 </div>
-                <span class="expand-vid-label">Urolithin A</span>
-              </div>
-              <div class="expand-vid">
-                <div class="expand-yt-wrap">
-                  <iframe src="https://www.youtube.com/embed/xzPoXUn-elc" title="Nasal Breathing" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <div class="expand-vid">
+                  <div class="expand-yt-wrap">
+                    <iframe src="https://www.youtube.com/embed/xzPoXUn-elc" title="Nasal Breathing" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                  </div>
+                  <span class="expand-vid-label">Nasal Breathing</span>
                 </div>
-                <span class="expand-vid-label">Nasal Breathing</span>
               </div>
             </div>
           </div>
 
         </div><!-- /list-career -->
 
-        <!-- HOBBY -->
+        <!-- HOBBY LIST -->
         <div class="project-list hidden" id="list-hobby">
 
-          <div class="project-row" id="row-catan"
-               data-thumb="https://img.youtube.com/vi/HHc5nEeeFtQ/maxresdefault.jpg"
-               data-fallback="https://img.youtube.com/vi/HHc5nEeeFtQ/hqdefault.jpg"
-               data-link="https://youtu.be/HHc5nEeeFtQ?si=stiJ-y5Ox45ku2kT"
+          <div class="project-item" id="proj-catan"
+               data-thumb="https://img.youtube.com/vi/HHc5nEeeFtQ/hqdefault.jpg"
+               data-fallback="https://img.youtube.com/vi/HHc5nEeeFtQ/mqdefault.jpg"
+               data-videoid="HHc5nEeeFtQ"
                data-multi="false">
-            <span class="proj-num">01</span>
-            <div class="proj-info">
-              <h3 class="proj-title">CATAN</h3>
-              <div class="proj-tags">
+            <div class="proj-header">
+              <h3 class="proj-name">CATAN</h3>
+              <div class="proj-meta">
+                <span class="proj-client">Personal Project</span>
                 <span class="proj-tag">A.I Content</span>
                 <span class="proj-tag">Video Editing</span>
                 <span class="proj-tag">Dubbing</span>
-                <span class="proj-client">Personal Project</span>
               </div>
             </div>
-            <span class="proj-arrow">&#8594;</span>
+            <div class="proj-body">
+              <p class="proj-desc">As an avid player, I couldn't ignore the hilarious phenomenon of how Catan consistently turns close friends into fierce rivals. The goal: walk the fine line between an epic cinematic trailer and a witty commercial — capturing the grandiose feeling of building empires, then sharply cutting to the explosive, table-flipping reality. Tearing friendships apart since 1995.</p>
+            </div>
           </div>
 
-          <div class="project-row" id="row-wedding"
-               data-thumb="https://img.youtube.com/vi/tsT5o09XCTA/maxresdefault.jpg"
-               data-fallback="https://img.youtube.com/vi/tsT5o09XCTA/hqdefault.jpg"
-               data-link="https://youtu.be/tsT5o09XCTA"
+          <div class="project-item" id="proj-wedding"
+               data-thumb="https://img.youtube.com/vi/tsT5o09XCTA/hqdefault.jpg"
+               data-fallback="https://img.youtube.com/vi/tsT5o09XCTA/mqdefault.jpg"
+               data-videoid="tsT5o09XCTA"
                data-multi="false">
-            <span class="proj-num">02</span>
-            <div class="proj-info">
-              <h3 class="proj-title">Ron &amp; Ella — Wedding Video</h3>
-              <div class="proj-tags">
-                <span class="proj-tag">A.I Content</span>
-                <span class="proj-tag">Video Editing</span>
+            <div class="proj-header">
+              <h3 class="proj-name">Ron &amp; Ella — Wedding Video</h3>
+              <div class="proj-meta">
                 <span class="proj-client">Close Friends</span>
-              </div>
-            </div>
-            <span class="proj-arrow">&#8594;</span>
-          </div>
-
-          <div class="project-row" id="row-cornichon"
-               data-thumb="https://img.youtube.com/vi/JQKZs5qGmZI/maxresdefault.jpg"
-               data-fallback="https://img.youtube.com/vi/JQKZs5qGmZI/hqdefault.jpg"
-               data-link="https://youtu.be/JQKZs5qGmZI?si=7snYANe_FTsC1xuJ"
-               data-multi="false">
-            <span class="proj-num">03</span>
-            <div class="proj-info">
-              <h3 class="proj-title">Le Passion Pour Le Cornichon</h3>
-              <div class="proj-tags">
                 <span class="proj-tag">A.I Content</span>
                 <span class="proj-tag">Video Editing</span>
-                <span class="proj-client">Personal Project</span>
               </div>
             </div>
-            <span class="proj-arrow">&#8594;</span>
+            <div class="proj-body">
+              <p class="proj-desc">When invited to my close friends' wedding, I wanted to break the ice with something that highlights the funny side of their relationship. Three specific questions, authentic candid answers, clever editing, and the power of AI — the result is unforgettable, upbeat, and genuinely hilarious.</p>
+            </div>
+          </div>
+
+          <div class="project-item" id="proj-cornichon"
+               data-thumb="https://img.youtube.com/vi/JQKZs5qGmZI/hqdefault.jpg"
+               data-fallback="https://img.youtube.com/vi/JQKZs5qGmZI/mqdefault.jpg"
+               data-videoid="JQKZs5qGmZI"
+               data-multi="false">
+            <div class="proj-header">
+              <h3 class="proj-name">Le Passion Pour Le Cornichon</h3>
+              <div class="proj-meta">
+                <span class="proj-client">Personal Project</span>
+                <span class="proj-tag">A.I Content</span>
+                <span class="proj-tag">Video Editing</span>
+              </div>
+            </div>
+            <div class="proj-body">
+              <p class="proj-desc">A playful nod to my early days with AI — walking the fine line between absolute luxury and complete absurdity. Ultra-realistic frames build anticipation like a high-end French perfume campaign, then abruptly reveal a completely ridiculous product. Proving you can achieve top-tier visuals without taking things too seriously.</p>
+            </div>
           </div>
 
         </div><!-- /list-hobby -->
-
       </div><!-- /work-list-panel -->
     </div><!-- /work-inner -->
   </section>
