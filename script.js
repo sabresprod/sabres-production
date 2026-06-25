@@ -61,56 +61,25 @@ const revealObs = new IntersectionObserver(entries => {
 }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
 revealEls.forEach(el => { el.classList.add('reveal-up'); revealObs.observe(el); });
 
-// ---- Sabres Two-Layer Reveal ----
+// ---- Sabres Scroll & Ending Centering ----
 const sabresContainer = document.getElementById('sabresContainer');
-const sabresNaked     = document.getElementById('sabresNaked');
-const sabresFull      = document.getElementById('sabresFull');
 const endingSpace     = document.getElementById('ending-space');
 
 function updateSabres() {
-  const scrollTop  = window.scrollY;
-  const docHeight  = document.documentElement.scrollHeight - window.innerHeight;
-  if (docHeight <= 0) return;
-  const p = Math.min(scrollTop / docHeight, 1); // 0 → 1
+  if (!sabresContainer || !endingSpace) return;
 
   // Check if we have scrolled to the ending space showcase section
   // It enters viewport when its top is <= 50% of viewport height
-  let isEnding = false;
-  if (endingSpace) {
-    const rect = endingSpace.getBoundingClientRect();
-    isEnding = rect.top <= window.innerHeight * 0.5;
-  }
+  const rect = endingSpace.getBoundingClientRect();
+  const isEnding = rect.top <= window.innerHeight * 0.5;
 
   if (isEnding) {
     sabresContainer.classList.add('centered');
     endingSpace.classList.add('visible');
   } else {
     sabresContainer.classList.remove('centered');
-    if (endingSpace) endingSpace.classList.remove('visible');
+    endingSpace.classList.remove('visible');
   }
-
-  // Calculate reveal progress of the elements (sprouting accessories)
-  let nakedOpacity = 0.82;
-  let eased = 0;
-
-  if (isEnding) {
-    nakedOpacity = 0.82;
-    eased = 1;
-  } else {
-    // Naked: always at high opacity, fades out slightly towards the bottom
-    nakedOpacity = p < 0.8 ? 0.82 : 0.82 - ((p - 0.8) / 0.2) * 0.15;
-    
-    // Full: grows from 10% scroll up to the point where ending showcase enters
-    const fullP = Math.max(0, Math.min((p - 0.05) / 0.8, 1));
-    eased = fullP < 0.5 ? 2 * fullP * fullP : 1 - Math.pow(-2 * fullP + 2, 2) / 2;
-  }
-
-  sabresNaked.style.opacity = nakedOpacity.toFixed(3);
-
-  // Sprouting elements: clip-path circle grows from 25% (inner fruit) to 95% (all elements)
-  const clipRadius = 25 + eased * 70;
-  sabresFull.style.opacity = eased.toFixed(3);
-  sabresFull.style.clipPath = `circle(${clipRadius.toFixed(1)}% at 50% 50%)`;
 }
 
 window.addEventListener('scroll', updateSabres, { passive: true });

@@ -56,10 +56,10 @@ ul  { list-style: none; }
 /* ---- Sabres Container & Rotator ---- */
 .sabres-container {
   position: fixed;
-  bottom: -6%;
-  right: -8%;
+  bottom: -8%;
+  right: -10%;
   width: 58vw;
-  max-width: 860px;
+  max-width: 800px;
   z-index: 10; /* Float in foreground */
   pointer-events: none;
   transform-origin: bottom right;
@@ -72,11 +72,11 @@ ul  { list-style: none; }
 }
 
 .sabres-container.centered {
-  bottom: 50%;
+  bottom: 35%;
   right: 50%;
-  transform: translate(50%, 50%); /* Move to center of screen */
-  width: 42vw;
-  max-width: 500px;
+  transform: translate(50%, 50%); /* Move to lower center of screen */
+  width: 40vw;
+  max-width: 480px;
 }
 
 .sabres-rotator {
@@ -104,18 +104,9 @@ ul  { list-style: none; }
   display: block;
 }
 
-.sabres-naked {
-  position: relative;
-  opacity: 0.82;
-}
-
 .sabres-full {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  /* clip-path starts at 25% to cover only the core fruit */
-  clip-path: circle(25% at 50% 50%);
-  transition: clip-path 0.1s ease;
+  position: relative;
+  opacity: 1;
 }
 
 /* ---- Navbar ---- */
@@ -651,11 +642,13 @@ ul  { list-style: none; }
 .ending-space {
   position: relative;
   z-index: 1;
-  height: 100vh;
+  height: 130vh;
   background: var(--dark-bg);
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
+  padding-top: 18vh;
   overflow: hidden;
 }
 .ending-content {
