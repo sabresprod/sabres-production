@@ -53,27 +53,69 @@ ul  { list-style: none; }
   opacity: 0.6;
 }
 
-/* ---- Sabres Layers ---- */
-.sabres-layer {
+/* ---- Sabres Container & Rotator ---- */
+.sabres-container {
   position: fixed;
   bottom: -6%;
   right: -8%;
   width: 58vw;
   max-width: 860px;
-  z-index: 0;
+  z-index: 10; /* Float in foreground */
   pointer-events: none;
   transform-origin: bottom right;
+  transition:
+    bottom 1.2s var(--ease),
+    right 1.2s var(--ease),
+    width 1.2s var(--ease),
+    max-width 1.2s var(--ease),
+    transform 1.2s var(--ease);
 }
-.sabres-layer img { width: 100%; height: auto; display: block; }
+
+.sabres-container.centered {
+  bottom: 50%;
+  right: 50%;
+  transform: translate(50%, 50%); /* Move to center of screen */
+  width: 42vw;
+  max-width: 500px;
+}
+
+.sabres-rotator {
+  width: 100%;
+  position: relative;
+  transform-origin: center center;
+}
+
+/* Infinitely spin the rotator when centered */
+.sabres-container.centered .sabres-rotator {
+  animation: slow-spin 25s linear infinite;
+}
+
+@keyframes slow-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.sabres-layer {
+  pointer-events: none;
+}
+.sabres-layer img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
 
 .sabres-naked {
+  position: relative;
   opacity: 0.82;
-  transform: scale(1);
 }
+
 .sabres-full {
+  position: absolute;
+  inset: 0;
   opacity: 0;
-  transform: scale(0.72);
-  transform-origin: center center;
+  /* clip-path starts at 25% to cover only the core fruit */
+  clip-path: circle(25% at 50% 50%);
+  transition: clip-path 0.1s ease;
 }
 
 /* ---- Navbar ---- */
@@ -180,7 +222,7 @@ ul  { list-style: none; }
   height: 100vh; min-height: 600px;
   display: flex; align-items: center; justify-content: center;
   overflow: hidden;
-  background: rgba(11, 6, 24, 0.78);
+  background: var(--dark-bg);
 }
 .hero-grain {
   position: absolute; inset: 0; z-index: 1; pointer-events: none; opacity: 0.35;
@@ -259,9 +301,8 @@ ul  { list-style: none; }
 /* ---- ABOUT ---- */
 .about {
   position: relative; z-index: 1;
-  background: rgba(242, 238, 255, 0.86);
+  background: var(--light-bg);
   padding: 120px 48px;
-  backdrop-filter: blur(2px);
 }
 .about-inner {
   max-width: 1200px; margin: 0 auto;
@@ -292,9 +333,8 @@ ul  { list-style: none; }
 /* ---- SERVICES ---- */
 .services {
   position: relative; z-index: 1;
-  background: rgba(15, 10, 34, 0.82);
+  background: var(--dark-bg-2);
   padding: 120px 48px; overflow: hidden;
-  backdrop-filter: blur(2px);
 }
 .services-grain {
   position: absolute; inset: 0; pointer-events: none; opacity: 0.28;
@@ -332,8 +372,7 @@ ul  { list-style: none; }
 /* ---- WORK ---- */
 .work {
   position: relative; z-index: 1;
-  background: rgba(242, 238, 255, 0.86);
-  backdrop-filter: blur(2px);
+  background: var(--light-bg);
 }
 .work-inner {
   max-width: 1300px; margin: 0 auto;
@@ -554,9 +593,8 @@ ul  { list-style: none; }
 /* ---- CONTACT ---- */
 .contact {
   position: relative; z-index: 1;
-  background: rgba(11, 6, 24, 0.72);
+  background: var(--dark-bg);
   padding: 140px 48px; overflow: hidden;
-  backdrop-filter: blur(1px);
 }
 .contact-grain {
   position: absolute; inset: 0; pointer-events: none; opacity: 0.28;
@@ -593,7 +631,7 @@ ul  { list-style: none; }
 /* ---- FOOTER ---- */
 .footer {
   position: relative; z-index: 1;
-  background: rgba(11, 6, 24, 0.18);
+  background: var(--dark-bg-2);
   border-top: 1px solid rgba(85, 51, 255, 0.15);
   padding: 48px 48px;
 }
@@ -608,6 +646,45 @@ ul  { list-style: none; }
   letter-spacing: 0.15em; color: var(--off-white); opacity: 0.4;
 }
 .footer-copy { font-size: 12px; color: var(--off-white); opacity: 0.18; letter-spacing: 0.05em; }
+
+/* ---- Ending Showcase ---- */
+.ending-space {
+  position: relative;
+  z-index: 1;
+  height: 100vh;
+  background: var(--dark-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.ending-content {
+  text-align: center;
+  z-index: 2;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 1s var(--ease), transform 1s var(--ease);
+}
+.ending-space.visible .ending-content {
+  opacity: 1;
+  transform: translateY(0);
+}
+.ending-title {
+  font-family: var(--font-display);
+  font-size: clamp(60px, 10vw, 120px);
+  color: var(--lime);
+  letter-spacing: 0.05em;
+  line-height: 1;
+  margin-bottom: 16px;
+}
+.ending-subtitle {
+  font-size: clamp(12px, 1.6vw, 16px);
+  font-weight: 300;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--off-white);
+  opacity: 0.5;
+}
 
 /* ---- Responsive ---- */
 @media (max-width: 1050px) {

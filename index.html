@@ -17,13 +17,18 @@
   <div class="cursor-dot" id="cursorDot"></div>
   <div class="cursor-ring" id="cursorRing"></div>
 
-  <!-- Fixed Sabres — Naked (always visible) -->
-  <div class="sabres-layer sabres-naked" id="sabresNaked" aria-hidden="true">
-    <img src="assets/Sabres_naked.png" alt="" />
-  </div>
-  <!-- Fixed Sabres — Full (grows with scroll) -->
-  <div class="sabres-layer sabres-full" id="sabresFull" aria-hidden="true">
-    <img src="assets/sabres_hero.png" alt="" />
+  <!-- Floating Sabres Container (Foreground) -->
+  <div class="sabres-container" id="sabresContainer" aria-hidden="true">
+    <div class="sabres-rotator" id="sabresRotator">
+      <!-- Fixed Sabres — Naked (always visible) -->
+      <div class="sabres-layer sabres-naked" id="sabresNaked">
+        <img src="assets/Sabres_naked.png" alt="" />
+      </div>
+      <!-- Fixed Sabres — Full (reveals on scroll via clip-path) -->
+      <div class="sabres-layer sabres-full" id="sabresFull">
+        <img src="assets/sabres_hero.png" alt="" />
+      </div>
+    </div>
   </div>
 
   <!-- Navbar -->
@@ -372,6 +377,14 @@
           <span>LinkedIn</span>
         </a>
       </div>
+    </div>
+  </section>
+
+  <!-- ===== ENDING SHOWCASE ===== -->
+  <section class="ending-space" id="ending-space">
+    <div class="ending-content">
+      <h2 class="ending-title">SABRES PRODUCTION</h2>
+      <p class="ending-subtitle">Create the Extraordinary.</p>
     </div>
   </section>
 
