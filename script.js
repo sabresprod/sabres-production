@@ -61,29 +61,6 @@ const revealObs = new IntersectionObserver(entries => {
 }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
 revealEls.forEach(el => { el.classList.add('reveal-up'); revealObs.observe(el); });
 
-// ---- Sabres Scroll & Ending Centering ----
-const sabresContainer = document.getElementById('sabresContainer');
-const endingSpace     = document.getElementById('ending-space');
-
-function updateSabres() {
-  if (!sabresContainer || !endingSpace) return;
-
-  // Check if we have scrolled to the ending space showcase section
-  // It enters viewport when its top is <= 50% of viewport height
-  const rect = endingSpace.getBoundingClientRect();
-  const isEnding = rect.top <= window.innerHeight * 0.5;
-
-  if (isEnding) {
-    sabresContainer.classList.add('centered');
-    endingSpace.classList.add('visible');
-  } else {
-    sabresContainer.classList.remove('centered');
-    endingSpace.classList.remove('visible');
-  }
-}
-
-window.addEventListener('scroll', updateSabres, { passive: true });
-updateSabres();
 
 // ---- Work Tabs ----
 const tabBtns    = document.querySelectorAll('.tab-btn');
