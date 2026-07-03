@@ -309,3 +309,5 @@ if (spikeWord) {
   spikeWord.addEventListener('pointerenter', updateLetterSpikes);
   spikeWord.addEventListener('pointerleave', hideLetterSpikes);
 }
+
+// Pages deploy trigger: 2026-07-03T18:10:55.122Z
