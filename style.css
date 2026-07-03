@@ -186,6 +186,41 @@ ul  { list-style: none; }
   margin-bottom: 28px;
 }
 .hero-title-line { display: block; color: var(--off-white); }
+
+/* ---- SABRES spike hover ---- */
+.spike-word {
+  position: relative;
+  display: inline-flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.018em;
+  color: var(--off-white);
+  overflow: visible;
+  padding: 0.14em 0.02em 0.08em;
+  margin: -0.14em -0.02em -0.08em;
+}
+.spike-letter {
+  position: relative;
+  display: inline-block;
+  color: inherit;
+  line-height: 0.85;
+  overflow: visible;
+}
+.letter-spike {
+  position: absolute;
+  left: var(--x);
+  top: calc(var(--y) - 0.07em);
+  width: var(--w);
+  height: var(--h);
+  background: currentColor;
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+  opacity: var(--o, 0);
+  transform: translate(-50%, -100%) rotate(var(--r)) scaleY(var(--s, 0));
+  transform-origin: 50% 100%;
+  transition: opacity 140ms ease, transform 180ms cubic-bezier(.2,.8,.2,1);
+  pointer-events: none;
+}
+
 .accent-line     { color: var(--purple-light); }
 .hero-sub {
   font-size: clamp(14px, 1.6vw, 17px);
