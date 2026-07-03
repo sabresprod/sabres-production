@@ -209,3 +209,103 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     }
   });
 });
+
+
+
+// ---- SABRES Spike Hover ----
+const spikeWord = document.getElementById('sabresSpikeWord');
+
+if (spikeWord) {
+  const letterProfiles = [
+    [
+      { x: 24, y: 4, side: 'top', r: -10 },
+      { x: 70, y: 5, side: 'top', r: 8 },
+      { x: 4, y: 34, side: 'left', r: -92 },
+      { x: 94, y: 66, side: 'right', r: 90 },
+    ],
+    [
+      { x: 50, y: 2, side: 'top', r: 0 },
+      { x: 16, y: 42, side: 'left', r: -70 },
+      { x: 84, y: 42, side: 'right', r: 70 },
+    ],
+    [
+      { x: 25, y: 3, side: 'top', r: -7 },
+      { x: 92, y: 28, side: 'right', r: 84 },
+      { x: 94, y: 70, side: 'right', r: 96 },
+      { x: 5, y: 52, side: 'left', r: -90 }
+    ],
+    [
+      { x: 26, y: 3, side: 'top', r: -7 },
+      { x: 92, y: 28, side: 'right', r: 82 },
+      { x: 73, y: 61, side: 'right', r: 112 },
+      { x: 5, y: 52, side: 'left', r: -90 }
+    ],
+    [
+      { x: 28, y: 3, side: 'top', r: -6 },
+      { x: 76, y: 4, side: 'top', r: 7 },
+      { x: 5, y: 52, side: 'left', r: -90 },
+      { x: 78, y: 52, side: 'right', r: 90 },
+    ],
+    [
+      { x: 24, y: 4, side: 'top', r: -10 },
+      { x: 70, y: 5, side: 'top', r: 8 },
+      { x: 4, y: 34, side: 'left', r: -92 },
+      { x: 94, y: 66, side: 'right', r: 90 },
+    ]
+  ];
+
+  const letters = [...spikeWord.querySelectorAll('.spike-letter')];
+
+  letters.forEach((letter, letterIndex) => {
+    const profile = letterProfiles[letterIndex] || letterProfiles[0];
+    profile.forEach((point, pointIndex) => {
+      const spike = document.createElement('i');
+      spike.className = 'letter-spike';
+      spike.style.setProperty('--x', point.x + '%');
+      spike.style.setProperty('--y', point.y + '%');
+      spike.style.setProperty('--r', point.r + 'deg');
+      spike.dataset.x = point.x;
+      spike.dataset.y = point.y;
+      spike.dataset.seed = String((letterIndex + 1) * 17 + pointIndex * 9);
+      const seed = Number(spike.dataset.seed);
+      spike.style.setProperty('--w', (0.045 + (seed % 5) * 0.008) + 'em');
+      spike.style.setProperty('--h', (0.10 + (seed % 4) * 0.025) + 'em');
+      letter.appendChild(spike);
+    });
+  });
+
+  function updateLetterSpikes(event) {
+    letters.forEach(letter => {
+      const rect = letter.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+      const dx = event.clientX - centerX;
+      const dy = event.clientY - centerY;
+      const letterDistance = Math.hypot(dx / Math.max(rect.width, 1), dy / Math.max(rect.height, 1));
+
+      letter.querySelectorAll('.letter-spike').forEach(spike => {
+        const anchorX = rect.left + rect.width * (Number(spike.dataset.x) / 100);
+        const anchorY = rect.top + rect.height * (Number(spike.dataset.y) / 100);
+        const distance = Math.hypot(event.clientX - anchorX, event.clientY - anchorY);
+        const radius = Math.max(52, rect.width * 1.15);
+        const proximity = Math.max(0, 1 - distance / radius);
+        const letterBoost = Math.max(0, 1 - letterDistance * 0.9);
+        const strength = Math.min(1, proximity * 1.1 + letterBoost * 0.18);
+
+        spike.style.setProperty('--o', strength > 0.16 ? String(0.98 * strength) : '0');
+        spike.style.setProperty('--s', strength > 0.16 ? String(0.35 + strength * 0.75) : '0');
+      });
+    });
+  }
+
+  function hideLetterSpikes() {
+    spikeWord.querySelectorAll('.letter-spike').forEach(spike => {
+      spike.style.setProperty('--o', '0');
+      spike.style.setProperty('--s', '0');
+    });
+  }
+
+  spikeWord.addEventListener('pointermove', updateLetterSpikes);
+  spikeWord.addEventListener('pointerenter', updateLetterSpikes);
+  spikeWord.addEventListener('pointerleave', hideLetterSpikes);
+}
