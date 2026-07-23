@@ -369,8 +369,8 @@ ul  { list-style: none; }
 .preview-logo { width: 180px; height: 180px; object-fit: contain; opacity: 0.1; }
 
 /* Thumbnail */
-.preview-thumb-wrap { background: var(--dark-bg); }
-.preview-thumb-img  { width: 100%; height: 100%; object-fit: cover; }
+.preview-thumb-wrap { background: #05030B; }
+.preview-thumb-img  { width: 100%; height: 100%; object-fit: contain; background: #05030B; }
 .preview-overlay {
   position: absolute; inset: 0;
   display: flex; align-items: center; justify-content: center;
