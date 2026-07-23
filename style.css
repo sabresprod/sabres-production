@@ -550,6 +550,74 @@ ul  { list-style: none; }
   margin-top: 8px; text-align: center;
 }
 
+/* DJ Sagi Kariv Multi-Video Carousel */
+.sagi-carousel {
+  margin-top: 16px;
+  background: rgba(85, 51, 255, 0.04);
+  border: 1px solid rgba(85, 51, 255, 0.15);
+  border-radius: 12px;
+  padding: 16px;
+}
+.sagi-carousel-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 12px; gap: 12px; flex-wrap: wrap;
+}
+.sagi-carousel-title {
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--purple);
+}
+.sagi-carousel-nav {
+  display: flex; align-items: center; gap: 10px;
+}
+.sagi-nav-btn {
+  background: rgba(85, 51, 255, 0.1);
+  color: var(--purple);
+  border: 1px solid rgba(85, 51, 255, 0.25);
+  border-radius: 50%;
+  width: 32px; height: 32px;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 14px; cursor: pointer;
+  transition: all 0.2s ease;
+}
+.sagi-nav-btn:hover {
+  background: var(--purple);
+  color: #fff;
+  border-color: var(--purple);
+}
+.sagi-nav-dots {
+  display: flex; gap: 6px; align-items: center;
+}
+.sagi-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: rgba(85, 51, 255, 0.25);
+  cursor: pointer; transition: all 0.2s ease;
+}
+.sagi-dot.active {
+  background: var(--purple);
+  transform: scale(1.25);
+}
+.sagi-carousel-viewport {
+  position: relative; width: 100%;
+}
+.sagi-slide {
+  display: none; width: 100%;
+}
+.sagi-slide.active {
+  display: block;
+}
+.sagi-video-container {
+  width: 100%; aspect-ratio: 16 / 9;
+  background: #000; border-radius: 8px; overflow: hidden;
+}
+.sagi-mp4-player {
+  width: 100%; height: 100%;
+  object-fit: contain; background: #000; display: block;
+}
+.sagi-yt-wrap {
+  padding-bottom: 56.25% !important; /* 16:9 for landscape promo */
+}
+
 /* ---- CONTACT ---- */
 .contact {
   position: relative; z-index: 1;

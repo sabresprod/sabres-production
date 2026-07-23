@@ -221,40 +221,55 @@
             </div>
           </div>
 
-          <div class="project-item" id="proj-sagi"
+          <div class="project-item project-item--multi" id="proj-sagi"
                data-thumb="https://img.youtube.com/vi/yiFBGXY513c/hqdefault.jpg"
                data-fallback="https://img.youtube.com/vi/yiFBGXY513c/mqdefault.jpg"
-               data-videoid="yiFBGXY513c"
-               data-multi="false">
+               data-videourl="https://archive.org/download/3-ny.-sf.-tor./3%20%D7%99%D7%9E%D7%99%D7%9D%20%D7%A2%D7%9D%20%D7%A9%D7%92%D7%99%D7%90%20NY.SF.TOR..mp4"
+               data-videoid=""
+               data-multi="true">
             <div class="proj-header">
-              <h3 class="proj-name">DJ SAGI KARIV — Summer Tour</h3>
+              <h3 class="proj-name">DJ SAGI KARIV — Summer Tour &amp; 36 Hours</h3>
               <div class="proj-meta">
                 <span class="proj-client">DJ SAGI KARIV</span>
+                <span class="proj-tag proj-tag--multi">2 Videos</span>
+                <span class="proj-tag">Documentary</span>
                 <span class="proj-tag">A.I Content</span>
                 <span class="proj-tag">Video Editing</span>
               </div>
             </div>
             <div class="proj-body">
-              <p class="proj-desc">When a world-renowned DJ asks you to create marketing assets for his international summer tour, you simply can't refuse. We kicked things off with a collaborative brainstorming process, translating the vibrant energy of his music into a striking and unique visual language — resulting in a campaign filled with highly creative, colorful deliverables.</p>
-            </div>
-          </div>
-
-          <div class="project-item" id="proj-sagi-tour"
-               data-thumb="https://archive.org/services/img/3-ny.-sf.-tor."
-               data-fallback="https://archive.org/services/img/3-ny.-sf.-tor."
-               data-videoid=""
-               data-videourl="https://archive.org/download/3-ny.-sf.-tor./3%20%D7%99%D7%9E%D7%99%D7%9D%20%D7%A2%D7%9D%20%D7%A9%D7%92%D7%99%D7%90%20NY.SF.TOR..mp4"
-               data-multi="false">
-            <div class="proj-header">
-              <h3 class="proj-name">DJ SAGI KARIV — 36 Hours | NY &middot; SF &middot; TOR</h3>
-              <div class="proj-meta">
-                <span class="proj-client">DJ SAGI KARIV</span>
-                <span class="proj-tag">Documentary</span>
-                <span class="proj-tag">Video Editing</span>
+              <p class="proj-desc">When world-renowned DJ Sagi Kariv embarked on his international tour across New York, San Francisco, and Toronto, we created an all-encompassing visual campaign. From high-energy AI-generated marketing promos to a raw, 36-hour behind-the-scenes documentary captured at full speed — translating the vibrant energy of his music into an unforgettable visual experience.</p>
+              
+              <div class="sagi-carousel" id="sagiCarousel">
+                <div class="sagi-carousel-header">
+                  <span class="sagi-carousel-title" id="sagiCarouselTitle">Video 1 of 2: 36 Hours Documentary (NY &middot; SF &middot; TOR)</span>
+                  <div class="sagi-carousel-nav">
+                    <button class="sagi-nav-btn prev" id="sagiPrevBtn" aria-label="Previous video">&larr;</button>
+                    <span class="sagi-nav-dots">
+                      <span class="sagi-dot active" data-index="0"></span>
+                      <span class="sagi-dot" data-index="1"></span>
+                    </span>
+                    <button class="sagi-nav-btn next" id="sagiNextBtn" aria-label="Next video">&rarr;</button>
+                  </div>
+                </div>
+                <div class="sagi-carousel-viewport">
+                  <!-- Video 1 (First!): 36 Hours MP4 -->
+                  <div class="sagi-slide active" data-slide="0">
+                    <div class="sagi-video-container">
+                      <video class="sagi-mp4-player" controls playsinline preload="metadata">
+                        <source src="https://archive.org/download/3-ny.-sf.-tor./3%20%D7%99%D7%9E%D7%99%D7%9D%20%D7%A2%D7%9D%20%D7%A9%D7%92%D7%99%D7%90%20NY.SF.TOR..mp4#t=0.1" type="video/mp4" />
+                      </video>
+                    </div>
+                  </div>
+                  <!-- Video 2: Summer Tour Promo (YouTube) -->
+                  <div class="sagi-slide" data-slide="1">
+                    <div class="expand-yt-wrap sagi-yt-wrap">
+                      <iframe src="https://www.youtube-nocookie.com/embed/yiFBGXY513c" title="DJ SAGI KARIV — Summer Tour" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
-            <div class="proj-body">
-              <p class="proj-desc">Three cities. Three nights. Zero sleep. A raw, unfiltered look at what it means to live inside a world-class DJ's orbit — from backstage in New York to packed venues in San Francisco and the electric chaos of Toronto. No script, no staging. Just real moments captured at full speed, cut into something that feels exactly like it felt to be there.</p>
+
             </div>
           </div>
 

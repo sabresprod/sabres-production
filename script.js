@@ -368,3 +368,53 @@ if (spikeWord) {
 }
 
 // Pages deploy trigger: 2026-07-03T18:10:55.122Z
+
+// ---- DJ SAGI KARIV Carousel Navigation ----
+(function initSagiCarousel() {
+  const carousel = document.getElementById('sagiCarousel');
+  if (!carousel) return;
+
+  const prevBtn = document.getElementById('sagiPrevBtn');
+  const nextBtn = document.getElementById('sagiNextBtn');
+  const title   = document.getElementById('sagiCarouselTitle');
+  const slides  = carousel.querySelectorAll('.sagi-slide');
+  const dots    = carousel.querySelectorAll('.sagi-dot');
+
+  const titles = [
+    'Video 1 of 2: 36 Hours Documentary (NY &middot; SF &middot; TOR)',
+    'Video 2 of 2: Summer Tour Campaign'
+  ];
+
+  let activeIndex = 0;
+
+  function setSlide(index) {
+    activeIndex = (index + slides.length) % slides.length;
+    slides.forEach((slide, i) => {
+      const isActive = i === activeIndex;
+      slide.classList.toggle('active', isActive);
+      if (!isActive) {
+        // Pause any playing media when switching slides
+        const vid = slide.querySelector('video');
+        if (vid) vid.pause();
+        const iframe = slide.querySelector('iframe');
+        if (iframe) {
+          const src = iframe.src;
+          iframe.src = '';
+          iframe.src = src;
+        }
+      }
+    });
+    dots.forEach((dot, i) => dot.classList.toggle('active', i === activeIndex));
+    if (title) title.innerHTML = titles[activeIndex] || '';
+  }
+
+  if (prevBtn) prevBtn.addEventListener('click', (e) => { e.stopPropagation(); setSlide(activeIndex - 1); });
+  if (nextBtn) nextBtn.addEventListener('click', (e) => { e.stopPropagation(); setSlide(activeIndex + 1); });
+  dots.forEach(dot => {
+    dot.addEventListener('click', (e) => {
+      e.stopPropagation();
+      setSlide(Number(dot.getAttribute('data-index')));
+    });
+  });
+})();
+
