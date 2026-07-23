@@ -154,7 +154,16 @@
 
       <!-- LEFT: Sticky preview panel -->
       <div class="work-preview-panel">
-        <div class="preview-inner">
+        <div class="preview-inner" id="previewInner">
+
+          <!-- Navigation arrows for multi-video projects -->
+          <button class="preview-nav-arrow prev" id="previewNavPrev" aria-label="Previous video">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <button class="preview-nav-arrow next" id="previewNavNext" aria-label="Next video">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+          <div class="preview-video-label" id="previewVideoLabel"></div>
 
           <!-- State 1: Default logo -->
           <div class="preview-state preview-default" id="previewDefault">
@@ -171,7 +180,7 @@
                 </svg>
               </button>
             </div>
-            <div class="preview-multi-badge" id="previewMultiBadge">3 videos below ↓</div>
+            <div class="preview-multi-badge" id="previewMultiBadge">3 videos below &darr;</div>
           </div>
 
           <!-- State 3: Inline player -->
@@ -224,9 +233,7 @@
           <div class="project-item project-item--multi" id="proj-sagi"
                data-thumb="https://img.youtube.com/vi/yiFBGXY513c/hqdefault.jpg"
                data-fallback="https://img.youtube.com/vi/yiFBGXY513c/mqdefault.jpg"
-               data-videourl="https://archive.org/download/3-ny.-sf.-tor./3%20%D7%99%D7%9E%D7%99%D7%9D%20%D7%A2%D7%9D%20%D7%A9%D7%92%D7%99%D7%90%20NY.SF.TOR..mp4"
-               data-videoid=""
-               data-multi="true">
+               data-videos='[{"type":"mp4","url":"https://archive.org/download/3-ny.-sf.-tor./3%20%D7%99%D7%9E%D7%99%D7%9D%20%D7%A2%D7%9D%20%D7%A9%D7%92%D7%99%D7%90%20NY.SF.TOR..mp4#t=0.1","title":"36 Hours Documentary (NY &middot; SF &middot; TOR)"},{"type":"youtube","id":"yiFBGXY513c","title":"Summer Tour Campaign"}]'>
             <div class="proj-header">
               <h3 class="proj-name">DJ SAGI KARIV — Summer Tour &amp; 36 Hours</h3>
               <div class="proj-meta">
@@ -239,37 +246,6 @@
             </div>
             <div class="proj-body">
               <p class="proj-desc">When world-renowned DJ Sagi Kariv embarked on his international tour across New York, San Francisco, and Toronto, we created an all-encompassing visual campaign. From high-energy AI-generated marketing promos to a raw, 36-hour behind-the-scenes documentary captured at full speed — translating the vibrant energy of his music into an unforgettable visual experience.</p>
-              
-              <div class="sagi-carousel" id="sagiCarousel">
-                <div class="sagi-carousel-header">
-                  <span class="sagi-carousel-title" id="sagiCarouselTitle">Video 1 of 2: 36 Hours Documentary (NY &middot; SF &middot; TOR)</span>
-                  <div class="sagi-carousel-nav">
-                    <button class="sagi-nav-btn prev" id="sagiPrevBtn" aria-label="Previous video">&larr;</button>
-                    <span class="sagi-nav-dots">
-                      <span class="sagi-dot active" data-index="0"></span>
-                      <span class="sagi-dot" data-index="1"></span>
-                    </span>
-                    <button class="sagi-nav-btn next" id="sagiNextBtn" aria-label="Next video">&rarr;</button>
-                  </div>
-                </div>
-                <div class="sagi-carousel-viewport">
-                  <!-- Video 1 (First!): 36 Hours MP4 -->
-                  <div class="sagi-slide active" data-slide="0">
-                    <div class="sagi-video-container">
-                      <video class="sagi-mp4-player" controls playsinline preload="metadata">
-                        <source src="https://archive.org/download/3-ny.-sf.-tor./3%20%D7%99%D7%9E%D7%99%D7%9D%20%D7%A2%D7%9D%20%D7%A9%D7%92%D7%99%D7%90%20NY.SF.TOR..mp4#t=0.1" type="video/mp4" />
-                      </video>
-                    </div>
-                  </div>
-                  <!-- Video 2: Summer Tour Promo (YouTube) -->
-                  <div class="sagi-slide" data-slide="1">
-                    <div class="expand-yt-wrap sagi-yt-wrap">
-                      <iframe src="https://www.youtube-nocookie.com/embed/yiFBGXY513c" title="DJ SAGI KARIV — Summer Tour" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
             </div>
           </div>
 

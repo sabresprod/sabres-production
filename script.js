@@ -91,10 +91,15 @@ const previewBackBtn    = document.getElementById('previewBackBtn');
 const previewIframe     = document.getElementById('previewIframe');
 const previewVideo      = document.getElementById('previewVideo');
 const previewVideoSrc   = document.getElementById('previewVideoSrc');
+const previewNavPrev    = document.getElementById('previewNavPrev');
+const previewNavNext    = document.getElementById('previewNavNext');
+const previewVideoLabel = document.getElementById('previewVideoLabel');
 
-let currentVideoId  = '';
-let currentVideoUrl = '';
-let playerActive    = false;
+let currentVideoId      = '';
+let currentVideoUrl     = '';
+let playerActive        = false;
+let currentProjectVideos= null;
+let currentVideoIndex   = 0;
 
 function showState(state) {
   previewDefault.classList.toggle('active',    state === 'default');
@@ -102,20 +107,70 @@ function showState(state) {
   previewPlayerWrap.classList.toggle('active', state === 'player');
 }
 
-function showThumb(thumb, fallback, videoId, isMulti, videoUrl) {
+function updateNavArrows() {
+  const hasMultiple = currentProjectVideos && currentProjectVideos.length > 1;
+  previewNavPrev.classList.toggle('visible', hasMultiple);
+  previewNavNext.classList.toggle('visible', hasMultiple);
+  previewVideoLabel.classList.toggle('visible', hasMultiple);
+  
+  if (hasMultiple && currentProjectVideos[currentVideoIndex]) {
+    const video = currentProjectVideos[currentVideoIndex];
+    previewVideoLabel.innerHTML = `Video ${currentVideoIndex + 1} of ${currentProjectVideos.length}: ${video.title || ''}`;
+  }
+}
+
+function loadVideoFromProject(index) {
+  if (!currentProjectVideos || !currentProjectVideos.length) return;
+  currentVideoIndex = (index + currentProjectVideos.length) % currentProjectVideos.length;
+  const videoData = currentProjectVideos[currentVideoIndex];
+
+  if (videoData.type === 'mp4') {
+    currentVideoUrl = videoData.url;
+    currentVideoId  = '';
+  } else {
+    currentVideoId  = videoData.id;
+    currentVideoUrl = '';
+  }
+
+  updateNavArrows();
+
+  if (playerActive) {
+    playVideo();
+  }
+}
+
+function showThumb(thumb, fallback, videoId, isMulti, videoUrl, videosArray) {
   if (playerActive) {
     if (currentVideoId === videoId && videoId && !isMulti) return;
-    if (currentVideoUrl === videoUrl && videoUrl) return;
+    if (currentVideoUrl === videoUrl && videoUrl && !isMulti) return;
     closePlayer();
   }
-  currentVideoId  = videoId  || '';
-  currentVideoUrl = videoUrl || '';
+
+  currentProjectVideos = videosArray || null;
+  currentVideoIndex    = 0;
+
+  if (currentProjectVideos && currentProjectVideos.length > 0) {
+    const firstVid = currentProjectVideos[0];
+    if (firstVid.type === 'mp4') {
+      currentVideoUrl = firstVid.url;
+      currentVideoId  = '';
+    } else {
+      currentVideoId  = firstVid.id;
+      currentVideoUrl = '';
+    }
+  } else {
+    currentVideoId  = videoId  || '';
+    currentVideoUrl = videoUrl || '';
+  }
+
+  updateNavArrows();
+
   previewThumb.src = thumb;
   previewThumb.onerror = () => {
     previewThumb.src = fallback;
     previewThumb.onerror = null;
   };
-  if (isMulti) {
+  if (isMulti && !currentProjectVideos) {
     previewMultiBadge.style.display = 'block';
     previewPlayBtn.style.display    = (videoId || videoUrl) ? 'flex' : 'none';
   } else {
@@ -127,6 +182,8 @@ function showThumb(thumb, fallback, videoId, isMulti, videoUrl) {
 
 function hideThumb() {
   if (playerActive) return;
+  currentProjectVideos = null;
+  updateNavArrows();
   showState('default');
 }
 
@@ -149,6 +206,7 @@ function playVideo() {
     previewIframe.src = `https://www.youtube-nocookie.com/embed/${currentVideoId}?autoplay=1&rel=0&modestbranding=1`;
   }
   playerActive = true;
+  updateNavArrows();
   showState('player');
 }
 
@@ -158,10 +216,26 @@ function closePlayer() {
   previewVideo.pause();
   previewVideoSrc.src = '';
   previewVideo.style.display = 'none';
-  playerActive   = false;
-  currentVideoId  = '';
-  currentVideoUrl = '';
+  playerActive        = false;
+  currentVideoId       = '';
+  currentVideoUrl      = '';
+  currentProjectVideos = null;
+  updateNavArrows();
   showState('default');
+}
+
+// Arrow Navigation Handlers
+if (previewNavPrev) {
+  previewNavPrev.addEventListener('click', e => {
+    e.stopPropagation();
+    loadVideoFromProject(currentVideoIndex - 1);
+  });
+}
+if (previewNavNext) {
+  previewNavNext.addEventListener('click', e => {
+    e.stopPropagation();
+    loadVideoFromProject(currentVideoIndex + 1);
+  });
 }
 
 // Play / Back buttons
@@ -182,10 +256,15 @@ projectItems.forEach(item => {
   const videoId  = item.getAttribute('data-videoid');
   const videoUrl = item.getAttribute('data-videourl') || '';
   const isMulti  = item.getAttribute('data-multi') === 'true';
+  const videosAttr = item.getAttribute('data-videos');
+  let videosArray = null;
+  if (videosAttr) {
+    try { videosArray = JSON.parse(videosAttr); } catch (e) {}
+  }
   const header   = item.querySelector('.proj-header');
 
   // Hover: show thumbnail
-  header.addEventListener('mouseenter', () => showThumb(thumb, fallback, videoId, isMulti, videoUrl));
+  header.addEventListener('mouseenter', () => showThumb(thumb, fallback, videoId, isMulti, videoUrl, videosArray));
   header.addEventListener('mouseleave', () => {
     if (!item.classList.contains('open') && !playerActive) hideThumb();
   });
@@ -195,8 +274,8 @@ projectItems.forEach(item => {
     const isOpen = item.classList.contains('open');
     projectItems.forEach(other => { if (other !== item) other.classList.remove('open'); });
     item.classList.toggle('open', !isOpen);
-    if (!isOpen && !isMulti && (videoId || videoUrl)) {
-      showThumb(thumb, fallback, videoId, isMulti, videoUrl);
+    if (!isOpen && (videoId || videoUrl || videosArray)) {
+      showThumb(thumb, fallback, videoId, isMulti, videoUrl, videosArray);
     }
     if (isOpen) hideThumb();
   });
@@ -205,11 +284,16 @@ projectItems.forEach(item => {
 // Start with first career project thumbnail as default
 const _firstItem = document.querySelector('#list-career .project-item');
 if (_firstItem) {
+  let _videosArray = null;
+  const _vAttr = _firstItem.getAttribute('data-videos');
+  if (_vAttr) { try { _videosArray = JSON.parse(_vAttr); } catch (e) {} }
   showThumb(
     _firstItem.getAttribute('data-thumb'),
     _firstItem.getAttribute('data-fallback') || _firstItem.getAttribute('data-thumb'),
     _firstItem.getAttribute('data-videoid'),
-    _firstItem.getAttribute('data-multi') === 'true'
+    _firstItem.getAttribute('data-multi') === 'true',
+    _firstItem.getAttribute('data-videourl') || '',
+    _videosArray
   );
 } else {
   showState('default');
@@ -369,52 +453,5 @@ if (spikeWord) {
 
 // Pages deploy trigger: 2026-07-03T18:10:55.122Z
 
-// ---- DJ SAGI KARIV Carousel Navigation ----
-(function initSagiCarousel() {
-  const carousel = document.getElementById('sagiCarousel');
-  if (!carousel) return;
 
-  const prevBtn = document.getElementById('sagiPrevBtn');
-  const nextBtn = document.getElementById('sagiNextBtn');
-  const title   = document.getElementById('sagiCarouselTitle');
-  const slides  = carousel.querySelectorAll('.sagi-slide');
-  const dots    = carousel.querySelectorAll('.sagi-dot');
-
-  const titles = [
-    'Video 1 of 2: 36 Hours Documentary (NY &middot; SF &middot; TOR)',
-    'Video 2 of 2: Summer Tour Campaign'
-  ];
-
-  let activeIndex = 0;
-
-  function setSlide(index) {
-    activeIndex = (index + slides.length) % slides.length;
-    slides.forEach((slide, i) => {
-      const isActive = i === activeIndex;
-      slide.classList.toggle('active', isActive);
-      if (!isActive) {
-        // Pause any playing media when switching slides
-        const vid = slide.querySelector('video');
-        if (vid) vid.pause();
-        const iframe = slide.querySelector('iframe');
-        if (iframe) {
-          const src = iframe.src;
-          iframe.src = '';
-          iframe.src = src;
-        }
-      }
-    });
-    dots.forEach((dot, i) => dot.classList.toggle('active', i === activeIndex));
-    if (title) title.innerHTML = titles[activeIndex] || '';
-  }
-
-  if (prevBtn) prevBtn.addEventListener('click', (e) => { e.stopPropagation(); setSlide(activeIndex - 1); });
-  if (nextBtn) nextBtn.addEventListener('click', (e) => { e.stopPropagation(); setSlide(activeIndex + 1); });
-  dots.forEach(dot => {
-    dot.addEventListener('click', (e) => {
-      e.stopPropagation();
-      setSlide(Number(dot.getAttribute('data-index')));
-    });
-  });
-})();
 
