@@ -193,8 +193,18 @@ projectItems.forEach(item => {
   });
 });
 
-// Start with default state
-showState('default');
+// Start with first career project thumbnail as default
+const _firstItem = document.querySelector('#list-career .project-item');
+if (_firstItem) {
+  showThumb(
+    _firstItem.getAttribute('data-thumb'),
+    _firstItem.getAttribute('data-fallback') || _firstItem.getAttribute('data-thumb'),
+    _firstItem.getAttribute('data-videoid'),
+    _firstItem.getAttribute('data-multi') === 'true'
+  );
+} else {
+  showState('default');
+}
 
 // ---- Smooth Scroll ----
 document.querySelectorAll('a[href^="#"]').forEach(a => {

@@ -598,10 +598,10 @@ ul  { list-style: none; }
 .marquee-track {
   display: flex;
   width: max-content;
-  animation: marquee-scroll 38s linear infinite;
+  animation: marquee-scroll 22s linear infinite;
 }
 .marquee-section:hover .marquee-track {
-  animation-duration: 110s;
+  animation-duration: 60s;
 }
 @keyframes marquee-scroll {
   from { transform: translateX(0); }
