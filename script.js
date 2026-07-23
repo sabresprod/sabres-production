@@ -132,6 +132,15 @@ function loadVideoFromProject(index) {
     currentVideoUrl = '';
   }
 
+  // Update thumbnail image to match selected video
+  const activeThumb    = videoData.thumb    || previewThumb.src;
+  const activeFallback = videoData.fallback || activeThumb;
+  previewThumb.src = activeThumb;
+  previewThumb.onerror = () => {
+    previewThumb.src = activeFallback;
+    previewThumb.onerror = null;
+  };
+
   updateNavArrows();
 
   if (playerActive) {
@@ -157,6 +166,10 @@ function showThumb(thumb, fallback, videoId, isMulti, videoUrl, videosArray) {
     } else {
       currentVideoId  = firstVid.id;
       currentVideoUrl = '';
+    }
+    if (firstVid.thumb) {
+      thumb    = firstVid.thumb;
+      fallback = firstVid.fallback || thumb;
     }
   } else {
     currentVideoId  = videoId  || '';
