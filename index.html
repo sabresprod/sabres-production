@@ -173,6 +173,9 @@
           <!-- State 2: Thumbnail -->
           <div class="preview-state preview-thumb-wrap" id="previewThumbWrap">
             <img src="" alt="Project preview" id="previewThumb" class="preview-thumb-img" />
+            <video id="previewThumbVideo" class="preview-thumb-img" muted playsinline preload="metadata" style="display:none; width:100%; height:100%; object-fit:cover;">
+              <source id="previewThumbVideoSrc" src="" type="video/mp4" />
+            </video>
             <div class="preview-overlay">
               <button class="preview-play-btn" id="previewPlayBtn" aria-label="Play video">
                 <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
@@ -231,9 +234,9 @@
           </div>
 
           <div class="project-item project-item--multi" id="proj-sagi"
-               data-thumb="https://img.youtube.com/vi/yiFBGXY513c/maxresdefault.jpg"
+               data-thumb="https://archive.org/download/3-ny.-sf.-tor./3%20%D7%99%D7%9E%D7%99%D7%9D%20%D7%A2%D7%9D%20%D7%A9%D7%92%D7%99%D7%90%20NY.SF.TOR..mp4#t=0.1"
                data-fallback="https://img.youtube.com/vi/yiFBGXY513c/hqdefault.jpg"
-               data-videos='[{"type":"mp4","url":"https://archive.org/download/3-ny.-sf.-tor./3%20%D7%99%D7%9E%D7%99%D7%9D%20%D7%A2%D7%9D%20%D7%A9%D7%92%D7%99%D7%90%20NY.SF.TOR..mp4#t=0.1","title":"36 Hours Documentary (NY &middot; SF &middot; TOR)","thumb":"https://img.youtube.com/vi/yiFBGXY513c/maxresdefault.jpg","fallback":"https://img.youtube.com/vi/yiFBGXY513c/hqdefault.jpg"},{"type":"youtube","id":"yiFBGXY513c","title":"Summer Tour Campaign","thumb":"https://img.youtube.com/vi/yiFBGXY513c/hqdefault.jpg","fallback":"https://img.youtube.com/vi/yiFBGXY513c/mqdefault.jpg"}]'>
+               data-videos='[{"type":"mp4","url":"https://archive.org/download/3-ny.-sf.-tor./3%20%D7%99%D7%9E%D7%99%D7%9D%20%D7%A2%D7%9D%20%D7%A9%D7%92%D7%99%D7%90%20NY.SF.TOR..mp4#t=0.1","title":"36 Hours Documentary (NY &middot; SF &middot; TOR)","thumb":"https://archive.org/download/3-ny.-sf.-tor./3%20%D7%99%D7%9E%D7%99%D7%9D%20%D7%A2%D7%9D%20%D7%A9%D7%92%D7%99%D7%90%20NY.SF.TOR..mp4#t=0.1","fallback":"https://img.youtube.com/vi/yiFBGXY513c/maxresdefault.jpg"},{"type":"youtube","id":"yiFBGXY513c","title":"Summer Tour Campaign","thumb":"https://img.youtube.com/vi/yiFBGXY513c/1.jpg","fallback":"https://img.youtube.com/vi/yiFBGXY513c/hqdefault.jpg"}]'>
             <div class="proj-header">
               <h3 class="proj-name">DJ SAGI KARIV — Summer Tour &amp; 36 Hours</h3>
               <div class="proj-meta">

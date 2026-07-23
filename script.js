@@ -82,18 +82,20 @@ tabBtns.forEach(btn => {
 
 // ---- Preview Panel — 3 States ----
 const previewDefault    = document.getElementById('previewDefault');
-const previewThumbWrap  = document.getElementById('previewThumbWrap');
-const previewPlayerWrap = document.getElementById('previewPlayerWrap');
-const previewThumb      = document.getElementById('previewThumb');
-const previewMultiBadge = document.getElementById('previewMultiBadge');
-const previewPlayBtn    = document.getElementById('previewPlayBtn');
-const previewBackBtn    = document.getElementById('previewBackBtn');
-const previewIframe     = document.getElementById('previewIframe');
-const previewVideo      = document.getElementById('previewVideo');
-const previewVideoSrc   = document.getElementById('previewVideoSrc');
-const previewNavPrev    = document.getElementById('previewNavPrev');
-const previewNavNext    = document.getElementById('previewNavNext');
-const previewVideoLabel = document.getElementById('previewVideoLabel');
+const previewThumbWrap     = document.getElementById('previewThumbWrap');
+const previewPlayerWrap    = document.getElementById('previewPlayerWrap');
+const previewThumb         = document.getElementById('previewThumb');
+const previewThumbVideo    = document.getElementById('previewThumbVideo');
+const previewThumbVideoSrc = document.getElementById('previewThumbVideoSrc');
+const previewMultiBadge    = document.getElementById('previewMultiBadge');
+const previewPlayBtn       = document.getElementById('previewPlayBtn');
+const previewBackBtn       = document.getElementById('previewBackBtn');
+const previewIframe        = document.getElementById('previewIframe');
+const previewVideo         = document.getElementById('previewVideo');
+const previewVideoSrc      = document.getElementById('previewVideoSrc');
+const previewNavPrev       = document.getElementById('previewNavPrev');
+const previewNavNext       = document.getElementById('previewNavNext');
+const previewVideoLabel    = document.getElementById('previewVideoLabel');
 
 let currentVideoId      = '';
 let currentVideoUrl     = '';
@@ -119,6 +121,32 @@ function updateNavArrows() {
   }
 }
 
+function renderActiveThumbnail(thumb, fallback, videoUrl) {
+  if (videoUrl && (videoUrl.includes('.mp4') || videoUrl.includes('archive.org'))) {
+    // Show exact 1st frame of MP4 video as thumbnail
+    if (previewThumbVideo) {
+      previewThumb.style.display = 'none';
+      previewThumbVideo.style.display = 'block';
+      const cleanUrl = videoUrl.includes('#t=') ? videoUrl : videoUrl + '#t=0.1';
+      if (previewThumbVideoSrc.src !== cleanUrl) {
+        previewThumbVideoSrc.src = cleanUrl;
+        previewThumbVideo.load();
+      }
+    }
+  } else {
+    // Show image thumbnail for YouTube / static image
+    if (previewThumbVideo) previewThumbVideo.style.display = 'none';
+    previewThumb.style.display = 'block';
+    if (thumb) {
+      previewThumb.src = thumb;
+      previewThumb.onerror = () => {
+        if (fallback) previewThumb.src = fallback;
+        previewThumb.onerror = null;
+      };
+    }
+  }
+}
+
 function loadVideoFromProject(index) {
   if (!currentProjectVideos || !currentProjectVideos.length) return;
   currentVideoIndex = (index + currentProjectVideos.length) % currentProjectVideos.length;
@@ -132,14 +160,8 @@ function loadVideoFromProject(index) {
     currentVideoUrl = '';
   }
 
-  // Update thumbnail image to match selected video
-  const activeThumb    = videoData.thumb    || previewThumb.src;
-  const activeFallback = videoData.fallback || activeThumb;
-  previewThumb.src = activeThumb;
-  previewThumb.onerror = () => {
-    previewThumb.src = activeFallback;
-    previewThumb.onerror = null;
-  };
+  // Render first frame / unique thumbnail of selected video
+  renderActiveThumbnail(videoData.thumb, videoData.fallback, currentVideoUrl);
 
   updateNavArrows();
 
@@ -177,12 +199,8 @@ function showThumb(thumb, fallback, videoId, isMulti, videoUrl, videosArray) {
   }
 
   updateNavArrows();
+  renderActiveThumbnail(thumb, fallback, currentVideoUrl);
 
-  previewThumb.src = thumb;
-  previewThumb.onerror = () => {
-    previewThumb.src = fallback;
-    previewThumb.onerror = null;
-  };
   if (isMulti && !currentProjectVideos) {
     previewMultiBadge.style.display = 'block';
     previewPlayBtn.style.display    = (videoId || videoUrl) ? 'flex' : 'none';
