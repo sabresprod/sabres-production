@@ -198,6 +198,8 @@ showState('default');
 
 // ---- Smooth Scroll ----
 document.querySelectorAll('a[href^="#"]').forEach(a => {
+  // Skip marquee items — they have their own handler
+  if (a.classList.contains('marquee-item')) return;
   a.addEventListener('click', e => {
     const target = document.querySelector(a.getAttribute('href'));
     if (target) {
@@ -207,6 +209,42 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
         behavior: 'smooth'
       });
     }
+  });
+});
+
+// ---- Marquee Click Navigation ----
+document.querySelectorAll('.marquee-item').forEach(item => {
+  item.addEventListener('click', e => {
+    e.preventDefault();
+    const targetId = item.getAttribute('data-target');
+    const tabName  = item.getAttribute('data-tab');
+
+    // 1. Switch to the correct tab if needed
+    const targetTabBtn = document.querySelector(`.tab-btn[data-tab="${tabName}"]`);
+    if (targetTabBtn && !targetTabBtn.classList.contains('active')) {
+      targetTabBtn.click();
+    }
+
+    // 2. Scroll to the Work section
+    const workSection = document.getElementById('work');
+    if (workSection) {
+      window.scrollTo({
+        top: workSection.getBoundingClientRect().top + window.scrollY - 72,
+        behavior: 'smooth'
+      });
+    }
+
+    // 3. After scroll settles, open the specific project
+    setTimeout(() => {
+      const projectEl = document.getElementById(targetId);
+      if (projectEl) {
+        const header = projectEl.querySelector('.proj-header');
+        if (header) header.click();
+        setTimeout(() => {
+          projectEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 150);
+      }
+    }, 650);
   });
 });
 

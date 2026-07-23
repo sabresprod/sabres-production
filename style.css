@@ -587,6 +587,54 @@ ul  { list-style: none; }
 .contact-item:hover::before { transform: scaleX(1); }
 .contact-icon { color: var(--lime); flex-shrink: 0; }
 
+/* ---- MARQUEE CATEGORIES ---- */
+.marquee-section {
+  position: relative; z-index: 1;
+  background: var(--dark-bg);
+  overflow: hidden;
+  border-top: 1px solid rgba(85, 51, 255, 0.3);
+  border-bottom: 1px solid rgba(85, 51, 255, 0.3);
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 38s linear infinite;
+}
+.marquee-section:hover .marquee-track {
+  animation-duration: 110s;
+}
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.marquee-content {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+}
+.marquee-item {
+  font-family: var(--font-display);
+  font-size: clamp(52px, 6.5vw, 96px);
+  letter-spacing: 0.04em;
+  line-height: 1;
+  color: var(--off-white);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 28px;
+  padding: 28px 20px;
+  transition: color 0.3s ease;
+  cursor: pointer;
+}
+.marquee-item:hover { color: var(--lime); }
+.marquee-sep {
+  color: var(--purple);
+  font-size: 0.45em;
+  opacity: 0.65;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
 /* ---- FOOTER ---- */
 .footer {
   position: relative; z-index: 1;
