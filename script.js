@@ -89,9 +89,12 @@ const previewMultiBadge = document.getElementById('previewMultiBadge');
 const previewPlayBtn    = document.getElementById('previewPlayBtn');
 const previewBackBtn    = document.getElementById('previewBackBtn');
 const previewIframe     = document.getElementById('previewIframe');
+const previewVideo      = document.getElementById('previewVideo');
+const previewVideoSrc   = document.getElementById('previewVideoSrc');
 
-let currentVideoId = '';
-let playerActive   = false;
+let currentVideoId  = '';
+let currentVideoUrl = '';
+let playerActive    = false;
 
 function showState(state) {
   previewDefault.classList.toggle('active',    state === 'default');
@@ -99,14 +102,14 @@ function showState(state) {
   previewPlayerWrap.classList.toggle('active', state === 'player');
 }
 
-function showThumb(thumb, fallback, videoId, isMulti) {
+function showThumb(thumb, fallback, videoId, isMulti, videoUrl) {
   if (playerActive) {
-    if (currentVideoId === videoId && videoId && !isMulti) {
-      return; // Don't interrupt if hovering over the playing project itself
-    }
+    if (currentVideoId === videoId && videoId && !isMulti) return;
+    if (currentVideoUrl === videoUrl && videoUrl) return;
     closePlayer();
   }
-  currentVideoId = videoId;
+  currentVideoId  = videoId  || '';
+  currentVideoUrl = videoUrl || '';
   previewThumb.src = thumb;
   previewThumb.onerror = () => {
     previewThumb.src = fallback;
@@ -114,7 +117,7 @@ function showThumb(thumb, fallback, videoId, isMulti) {
   };
   if (isMulti) {
     previewMultiBadge.style.display = 'block';
-    previewPlayBtn.style.display    = videoId ? 'flex' : 'none';
+    previewPlayBtn.style.display    = (videoId || videoUrl) ? 'flex' : 'none';
   } else {
     previewMultiBadge.style.display = 'none';
     previewPlayBtn.style.display    = 'flex';
@@ -128,17 +131,37 @@ function hideThumb() {
 }
 
 function playVideo() {
-  if (!currentVideoId) return;
-  previewIframe.src = `https://www.youtube-nocookie.com/embed/${currentVideoId}?autoplay=1&rel=0&modestbranding=1`;
+  if (!currentVideoId && !currentVideoUrl) return;
+
+  if (currentVideoUrl) {
+    // Direct MP4 (e.g. archive.org)
+    previewIframe.style.display = 'none';
+    previewIframe.src = '';
+    previewVideoSrc.src = currentVideoUrl;
+    previewVideo.style.display = 'block';
+    previewVideo.load();
+    previewVideo.play().catch(() => {});
+  } else {
+    // YouTube embed
+    previewVideo.style.display = 'none';
+    previewVideo.pause();
+    previewIframe.style.display = 'block';
+    previewIframe.src = `https://www.youtube-nocookie.com/embed/${currentVideoId}?autoplay=1&rel=0&modestbranding=1`;
+  }
   playerActive = true;
   showState('player');
 }
 
 function closePlayer() {
-  previewIframe.src = ''; // stops video playback
-  playerActive = false;
+  previewIframe.src = '';
+  previewIframe.style.display = 'block';
+  previewVideo.pause();
+  previewVideoSrc.src = '';
+  previewVideo.style.display = 'none';
+  playerActive   = false;
+  currentVideoId  = '';
+  currentVideoUrl = '';
   showState('default');
-  currentVideoId = '';
 }
 
 // Play / Back buttons
@@ -157,39 +180,25 @@ projectItems.forEach(item => {
   const thumb    = item.getAttribute('data-thumb');
   const fallback = item.getAttribute('data-fallback') || thumb;
   const videoId  = item.getAttribute('data-videoid');
+  const videoUrl = item.getAttribute('data-videourl') || '';
   const isMulti  = item.getAttribute('data-multi') === 'true';
   const header   = item.querySelector('.proj-header');
 
-  // Hover: show thumbnail (only if player not active)
-  header.addEventListener('mouseenter', () => showThumb(thumb, fallback, videoId, isMulti));
+  // Hover: show thumbnail
+  header.addEventListener('mouseenter', () => showThumb(thumb, fallback, videoId, isMulti, videoUrl));
   header.addEventListener('mouseleave', () => {
-    // Only hide if this item isn't open
-    if (!item.classList.contains('open') && !playerActive) {
-      hideThumb();
-    }
+    if (!item.classList.contains('open') && !playerActive) hideThumb();
   });
 
-  // Click header: toggle description open/close
+  // Click header: toggle description
   header.addEventListener('click', () => {
     const isOpen = item.classList.contains('open');
-
-    // Close all other items
-    projectItems.forEach(other => {
-      if (other !== item) other.classList.remove('open');
-    });
-
+    projectItems.forEach(other => { if (other !== item) other.classList.remove('open'); });
     item.classList.toggle('open', !isOpen);
-
-    // If multi (UGC), don't try to play in preview; show thumbnail
-    if (!isOpen && !isMulti && videoId) {
-      // Keep thumbnail visible when open
-      showThumb(thumb, fallback, videoId, isMulti);
+    if (!isOpen && !isMulti && (videoId || videoUrl)) {
+      showThumb(thumb, fallback, videoId, isMulti, videoUrl);
     }
-
-    // If closing, hide thumb (unless hovering)
-    if (isOpen) {
-      hideThumb();
-    }
+    if (isOpen) hideThumb();
   });
 });
 
